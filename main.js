@@ -21,7 +21,6 @@ let fetchData = async() => {
   let inputSearch = document.getElementById('input-id').value.trim();
   const fetchUrl = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${inputSearch}`);
   const data = await fetchUrl.json();
-  console.log(data);
 
   try {
     createAllCards(data)
@@ -87,16 +86,13 @@ let showAllCards = () => {
 let fetchDataMealId = async(idMeal) => {
   // const cardMeal = document.querySelectorAll('.card')
   const fetchUrlId = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idMeal}`);
-  console.log(fetchUrlId)
   const dataFetchUrlId = await fetchUrlId.json();
-  console.log(dataFetchUrlId.meals[0]);
   
   createMealModal(dataFetchUrlId);
 };
 
 //Create ID Meal Modal:
 let createMealModal = (data) => {
-  console.log(data.meals[0].strCategory);
   let templateMealModal = '';
   templateMealModal = 
   `
@@ -120,7 +116,6 @@ let openMealModal = () => {
     btn.addEventListener('click', (e) => {
       modalWrapper.style.display = 'flex'
       let btnId = e.target.parentElement.dataset.id
-      console.log(btnId);
       fetchDataMealId(btnId)
     });
   })
